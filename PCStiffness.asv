@@ -1,0 +1,31 @@
+%% Polycarbonate Spring Stiffness Calculation
+
+% Import symbolic units
+units = symunit;
+
+% Define the properties of the polycarbonate spring with symbolic units
+E_pc = 2200 * units.MPa;             % Tensile modulus of polycarbonate in MPa
+width_pc = 12 * units.in;             % Width of polycarbonate spring in inches
+height_pc = 12 * units.in;            % Height of polycarbonate spring in inches
+radiusHole 
+thickness_pc = 0.5 * units.in;       % Thickness of a single polycarbonate layer in inches
+number_of_PC = 6;                   % Number of polycarbonate layers
+L_pc = number_of_PC * thickness_pc;  % Total length of the polycarbonate spring (number_of_PC * thickness)
+
+% Calculate the cross-sectional area of the polycarbonate spring
+% Cross-sectional area for a rectangular cross-section
+A_pc = width_pc * height_pc;         % Cross-sectional area in in^2
+
+% Convert all polycarbonate spring properties to SI units (meters and Pascals)
+E_pc_SI = rewrite(E_pc, units.Pa);          % Convert Young's modulus to Pascals (Pa)
+width_pc_SI = rewrite(width_pc, units.m);   % Convert width to meters (m)
+height_pc_SI = rewrite(height_pc, units.m); % Convert height to meters (m)
+thickness_pc_SI = rewrite(thickness_pc, units.m); % Convert thickness to meters (m)
+A_pc_SI = rewrite(A_pc, units.m^2);         % Convert cross-sectional area to m^2
+L_pc_SI = rewrite(L_pc, units.m);           % Convert length to meters (m)
+
+% Calculate Polycarbonate Spring Stiffness in SI units
+k_pc_SI = (E_pc_SI * A_pc_SI) / L_pc_SI;    % Stiffness in N/m
+
+% Display the calculated stiffness of the polycarbonate spring in N/m
+fprintf('The calculated stiffness of the polycarbonate spring is %.2f N/m\n', double(separateUnits(k_pc_SI)));
